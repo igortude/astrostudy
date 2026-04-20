@@ -79,7 +79,7 @@ Os dados são extraídos automaticamente via pipeline customizado da API NeoWs d
 
 ---
 
-Desenvolvido por **Igor** – *Cientista de Dados & Engenheiro de Machine Learning*
+Desenvolvido por **Igor** – *Estudante de Ciência de Dados & Engenharia de Machine Learning*
 
 - [Portfólio Pessoal](https://github.com/igortude)
 - [LinkedIn](https://www.linkedin.com/in/igor-tude-309480299/)
