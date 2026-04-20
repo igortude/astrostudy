@@ -1,0 +1,25 @@
+# Segredos
+.env
+
+# Dados
+data/raw/
+data/interim/
+data/processed/
+
+# Modelos treinados
+models/trained/
+models/reports/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+*.egg-info/
+build/
+dist/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Logs
+logs/

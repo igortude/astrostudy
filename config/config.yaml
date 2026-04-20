@@ -1,0 +1,21 @@
+api:
+  chunk_days: 7
+
+processing:
+  min_diameter_km: 0.001
+  max_miss_distance_km: 7500000
+
+features:
+  velocity_bins: [0, 10, 20, 30, 50, 100]
+
+model:
+  algorithm: "random_forest"
+  n_estimators: 300
+  max_depth: 15
+  test_size: 0.2
+  random_state: 42
+  scoring: "f1_weighted"
+
+dashboard:
+  refresh_interval_seconds: 300
+  max_asteroids_display: 500
