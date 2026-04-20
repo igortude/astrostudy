@@ -11,45 +11,55 @@
 ## 💡 Resumo do projeto
 O **AstroStudy** é uma solução avançada de Data Science e Engenharia de Dados desenvolvida para analisar e prever o risco de asteroides próximos à Terra (Near-Earth Objects). O sistema consome dados reais da **API NeoWs da NASA**, processa as variáveis astronômicas e utiliza **Machine Learning** para identificar ameaças iminentes.
 
-O projeto evoluiu de um pipeline de processamento bruto para uma plataforma completa de monitoramento orbital, unindo rigor estatístico de nível sênior a uma interface interativa de alta performance.
+O diferencial deste projeto é o foco em **engenharia de features baseada em princípios físicos** e decisões de modelagem orientadas ao risco real, indo além de simples heurísticas booleanas.
 
 ---
 
-## ❓ Problema de negócio / contexto
-Agências espaciais frequentemente utilizam heurísticas booleanas rígidas (ex: *diâmetro > 150m* E *distância < 0.05 UA*) para rotular um asteroide como potencialmente perigoso. Treinar modelos de IA em cima dessas regras simples apenas cria algoritmos que decoram as regras humanas, sem aprender a verdadeira dinâmica física do risco.
+## 🧠 O Problema de Negócio (Data Science Case)
+Agências espaciais frequentemente utilizam heurísticas rígidas (ex: *diâmetro > 150m* E *distância < 0.05 UA*) para rotular um asteroide. No entanto, o risco real é uma dinâmica contínua entre tamanho, velocidade e proximidade.
 
-**O desafio:** 
-- Fugir do label fraco da NASA e criar uma variável de risco contínua e baseada em física.
-- Lidar com um **desbalanceamento severo de classes** (cerca de 92% dos objetos são inofensivos).
-- Minimizar Falsos Negativos a zero. Em Defesa Planetária, o custo de ignorar um asteroide perigoso é incalculável.
+**Filosofia do Modelo:**
+> "Em problemas críticos, o melhor modelo não é o que mais acerta — é o que menos erra quando o erro importa."
+
+Para Defesa Planetária, o custo de um **Falso Negativo** (ignorar um meteoro perigoso) é infinito. Por isso, o AstroStudy foi otimizado para **Recall Máximo**, priorizando a detecção de todos os eventos críticos, mesmo aceitando um maior número de alarmes falsos (Falsos Positivos).
 
 ---
 
 ## 🛰️ Radar de Risco Orbital (Dashboard)
-A jóia da coroa do projeto é o **Dashboard Interativo**, desenvolvido para ser uma ferramenta de análise profissional:
+A ferramenta central é o **Dashboard Interativo**, que oferece:
 
-- **Modos de Operação Duplos**: Alterne entre **Simulação Manual** (para cenários "What-if") e **Dados Reais** (explorando o histórico da NASA).
-- **IA Explicável (XAI)**: O sistema não apenas dá um "0 ou 1", mas explica *por que* um objeto é perigoso através do **AstroRisk Score**.
-- **Análise de Divergência**: Uma funcionalidade avançada que detecta e explica discrepâncias entre a IA do projeto e a classificação oficial da NASA.
-- **Histórico Temporal**: Visualize a biografia orbital de asteroides recorrentes através de gráficos de séries temporais.
-
----
-
-## 📊 Dados e Metodologia
-Os dados são extraídos automaticamente via pipeline customizado da API NeoWs da NASA.
-
-### Arquitetura do Sistema:
-1.  **Ingestão Resiliente**: Scripts com política de *Retry* e backoff exponencial.
-2.  **Feature Engineering Física**: 
-    *   **AstroRisk Score**: Aproximação de Energia Cinética ($E \propto d^3 \cdot v^2 / dist$).
-    *   **Transformações Logarítmicas**: Estabilização de variância para modelos lineares.
-3.  **Camada de Inferência (Production Ready)**: Classe `RiskPredictor` robusta, com validação de entrada e tratamento de erros profissional.
+- **Modos de Operação**: Alterne entre **Simulação Manual** e **Dados Reais** da NASA.
+- **IA Explicável (XAI)**: Insights sobre o que influenciou a predição.
+- **Análise de Divergência**: Detecta e explica por que a IA pode discordar da classificação oficial da NASA.
+- **Histórico Temporal**: Rastreamento de múltiplas passagens de um mesmo asteroide.
 
 ---
 
-## 📈 Resultados (Data Case)
-- **Recuperação (Recall) de 100%**: O modelo prioriza a segurança planetária, garantindo que **nenhuma ameaça real passe despercebida**, mesmo que isso gere alarmes falsos controlados.
-- **Consistência Estatística**: Validado via *StratifiedKFold* com recall médio estável em 1.0000.
+## ⚙️ Engenharia de Features Sênior
+- **Média Geométrica do Diâmetro**: Redução de ruído em medidas exponenciais.
+- **Transformação Logarítmica**: Estabilização de outliers e normalização de escalas físicas.
+- **AstroRisk Score**: Variável proprietária baseada na relação de **Energia Cinética** ($E \propto d^3 \cdot v^2 / dist$).
+- **Uncertainty Ratio**: Métrica de incerteza da medição original da NASA.
+
+---
+
+## ⚖️ Nota de Humildade Técnica (Disclaimer)
+Embora o AstroStudy utilize dados reais e técnicas avançadas de Machine Learning, este é um **projeto de natureza educacional e científica**. 
+
+- **Autoridade**: A NASA e agências espaciais parceiras continuam sendo as fontes oficiais e definitivas para qualquer dado sobre Defesa Planetária.
+- **Divergências**: Quando o modelo diverge da NASA, isso deve ser interpretado como uma diferença em **sensibilidade estatística** e critérios de threshold, e não como uma correção ao label institucional.
+- **Finalidade**: O objetivo aqui é demonstrar o pipeline completo de Data Science e como diferentes métricas (como Recall vs Precision) impactam a tomada de decisão em cenários críticos.
+
+---
+
+## 📊 Resultados e Validação
+| Métrica   | Resultado |
+|----------|----------|
+| **Recall (Sensibilidade)** | **100%** |
+| **Precisão** | ~40% |
+| **F1-Score** | ~0.57 |
+
+O modelo foi validado via **Stratified Cross-Validation (5-folds)**, mantendo 100% de recall em todos os cenários, provando que a detecção é robusta e baseada em fundamentos físicos, não em sorte de split.
 
 ---
 
@@ -62,19 +72,12 @@ Os dados são extraídos automaticamente via pipeline customizado da API NeoWs d
    python -m venv .venv
    source .venv/bin/activate
    pip install -e .
-   pip install -r requirements.txt # Ou instale manual: streamlit plotly pandas scikit-learn loguru joblib
+   pip install -r requirements.txt
    ```
 
 2. **Executar o Dashboard**:
    ```bash
    streamlit run dashboard/app.py
-   ```
-
-3. **Pipelines de Dados (Opcional)**:
-   ```bash
-   python pipelines/run_ingestion.py   # Ingestão Raw
-   python pipelines/run_processing.py  # Feature Engineering
-   python pipelines/run_baseline_training.py # Treinamento do Modelo
    ```
 
 ---
@@ -86,4 +89,4 @@ Desenvolvido por **Igor** – *Cientista de Dados & Engenheiro de Machine Learni
 - [E-mail](mailto:igortude@hotmail.com)
 
 ---
-*Este projeto é uma prova técnica de ponta a ponta, unindo Engenharia de Dados, Feature Engineering e Machine Learning aplicados.*
+*Este projeto une Engenharia de Dados, Feature Engineering e Machine Learning em uma prova técnica de ponta a ponta.*

@@ -125,13 +125,14 @@ O projeto prioriza **recall**, alinhado a cenários críticos como:
 
 ---
 
-## 🚀 Próximos Passos
+## 🚀 Evolução e Status Atual
 
-- Expandir o dataset (1+ ano de dados)
-- Aplicar validação cruzada (cross-validation)
-- Testar modelos mais robustos (Random Forest, XGBoost)
-- Analisar curvas ROC e Precision-Recall
-- Desenvolver dashboard interativo (Streamlit)
+O projeto avançou significativamente desde o baseline inicial. As seguintes metas foram atingidas:
+
+✔ **Validação Cruzada (Cross-Validation)**: Aplicada com 5-folds para garantir estabilidade do Recall.  
+✔ **Curvas Precision-Recall**: Implementadas para análise técnica de threshold.  
+✔ **Dashboard Interativo**: Desenvolvido em Streamlit com análise de dados reais e simulação.  
+✔ **IA Explicável (XAI)**: Implementada lógica de interpretação de divergência.  
 
 ---
 
@@ -139,6 +140,20 @@ O projeto prioriza **recall**, alinhado a cenários críticos como:
 
 > Em problemas críticos, o melhor modelo não é o que mais acerta —  
 > é o que menos erra quando o erro importa.
+
+---
+
+## 🚀 Próximos Passos (Backlog)
+
+- [ ] Testar modelos de conjunto (Random Forest, XGBoost) para tentar subir a Precisão sem perder o Recall de 100%.
+- [ ] Implementar integração direta com a API para monitoramento em tempo real (Streaming).
+- [ ] Refinar o AstroRisk Score com dados de composição mineral (se disponível).
+
+---
+
+## ⚖️ Nota de Responsabilidade
+
+Este projeto é um **estudo de caso acadêmico/profissional** de Data Science. As divergências apresentadas entre o modelo e os labels da NASA servem para ilustrar como diferentes algoritmos interpretam o risco físico, e não possuem validade astronômica institucional. A NASA permanece a autoridade máxima em Defesa Planetária.
 
 ---
 
