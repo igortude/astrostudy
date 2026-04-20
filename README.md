@@ -82,7 +82,7 @@ O modelo foi validado via **Stratified Cross-Validation (5-folds)**, mantendo 10
 
 ---
 
-Desenvolvido por **Igor** – *Cientista de Dados & Engenheiro de Machine Learning*
+Desenvolvido por **Igor** – *Estudante de Ciência de Dados & Engenharia de Machine Learning*
 
 - [Portfólio Pessoal](https://github.com/igortude)
 - [LinkedIn](https://www.linkedin.com/in/igor-tude-309480299/)
