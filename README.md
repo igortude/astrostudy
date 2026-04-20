@@ -3,6 +3,7 @@
 ![Python](https://img.shields.io/badge/Python-3.11+-3776AB?style=for-the-badge&logo=python&logoColor=white)
 ![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white)
 ![Pandas](https://img.shields.io/badge/Pandas-150458?style=for-the-badge&logo=pandas&logoColor=white)
+![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)
 ![NASA API](https://img.shields.io/badge/NASA_API-0B3D91?style=for-the-badge&logo=nasa&logoColor=white)
 
 ---
@@ -10,7 +11,7 @@
 ## 💡 Resumo do projeto
 O **AstroStudy** é uma solução avançada de Data Science e Engenharia de Dados desenvolvida para analisar e prever o risco de asteroides próximos à Terra (Near-Earth Objects). O sistema consome dados reais da **API NeoWs da NASA**, processa as variáveis astronômicas e utiliza **Machine Learning** para identificar ameaças iminentes.
 
-O projeto transforma telemetria bruta espacial em inteligência preditiva, focando na segurança planetária e na eliminação de falsos negativos através de rigor estatístico de nível sênior.
+O projeto evoluiu de um pipeline de processamento bruto para uma plataforma completa de monitoramento orbital, unindo rigor estatístico de nível sênior a uma interface interativa de alta performance.
 
 ---
 
@@ -20,79 +21,60 @@ Agências espaciais frequentemente utilizam heurísticas booleanas rígidas (ex:
 **O desafio:** 
 - Fugir do label fraco da NASA e criar uma variável de risco contínua e baseada em física.
 - Lidar com um **desbalanceamento severo de classes** (cerca de 92% dos objetos são inofensivos).
-- Minimizar Falsos Negativos a zero. Em Defesa Planetária, o custo de ignorar um asteroide perigoso é incalculável. Preferimos lidar com alarmes falsos (Falsos Positivos) do que ignorar ameaças.
+- Minimizar Falsos Negativos a zero. Em Defesa Planetária, o custo de ignorar um asteroide perigoso é incalculável.
 
 ---
 
-## 📊 Dados utilizados
-Os dados são extraídos automaticamente via pipeline customizado da API NeoWs da NASA (endpoint `/feed`), e armazenados em formato raw (JSON) para garantir imutabilidade:
+## 🛰️ Radar de Risco Orbital (Dashboard)
+A jóia da coroa do projeto é o **Dashboard Interativo**, desenvolvido para ser uma ferramenta de análise profissional:
 
-| Feature | Descrição |
-|--------|-----------|
-| `estimated_diameter` | Diâmetros mínimo e máximo estimados (em km). |
-| `relative_velocity` | Velocidade de aproximação do objeto (em km/s). |
-| `miss_distance` | Distância do objeto em relação à Terra no ponto mais próximo. |
-| `is_hazardous` | O label determinístico original da NASA (Alvo da modelagem base). |
-
-> [!NOTE]
-> O pipeline de ingestão (`DataSaver`) salva os dados em um envelope de metadados, garantindo a rastreabilidade, contagem de registros e idempotência das extrações diárias.
+- **Modos de Operação Duplos**: Alterne entre **Simulação Manual** (para cenários "What-if") e **Dados Reais** (explorando o histórico da NASA).
+- **IA Explicável (XAI)**: O sistema não apenas dá um "0 ou 1", mas explica *por que* um objeto é perigoso através do **AstroRisk Score**.
+- **Análise de Divergência**: Uma funcionalidade avançada que detecta e explica discrepâncias entre a IA do projeto e a classificação oficial da NASA.
+- **Histórico Temporal**: Visualize a biografia orbital de asteroides recorrentes através de gráficos de séries temporais.
 
 ---
 
-## 🛠️ Metodologia e ferramentas
-A solução foi arquitetada em três camadas profissionais:
+## 📊 Dados e Metodologia
+Os dados são extraídos automaticamente via pipeline customizado da API NeoWs da NASA.
 
-1.  **Engenharia de Dados (Ingestão)**: Scripts resilientes que executam chamadas à API da NASA em modo "chunked" (janelas de 7 dias) com políticas de *Retry* (Backoff Exponencial) para evitar limites de taxa (Rate Limits).
-2.  **Feature Engineering Sênior (Inteligência Física)**: 
-    *   Criação do **AstroRisk Score**, uma aproximação baseada em Energia Cinética ($E \propto d^3 \cdot v^2 / dist$).
-    *   Aplicação de Transformações Logarítmicas ($log_{10}$) para estabilizar grandezas de diferentes ordens de magnitude.
-3.  **Machine Learning (Foco em Risco)**: Treinamento de uma Regressão Logística com `class_weight='balanced'` e aplicação de Validação Cruzada Estratificada (*StratifiedKFold*) em 5 cenários.
-
----
-
-## 📈 Principais insights e resultados (Data Case)
-Após a coleta extensiva e execução do modelo Baseline, os seguintes resultados provaram a tese do projeto:
-
-- **AstroRisk Score**: A nova variável contínua obteve forte correlação com os padrões da NASA, provando que o modelo pode aprender o risco de forma autônoma sem decorar regras rígidas.
-- **Métrica de Sobrevivência (Recall)**: Ao balancear os pesos da classe minoritária, o algoritmo saltou de 50% para **100% de Sensibilidade**. 
-- **O Trade-off Consciente**: Atingimos 100% de Recall sacrificando a Precisão (que se estabilizou em ~40%). Isso resultou em zero Falsos Negativos, traduzido na prática como: *"Nenhuma ameaça planetária passou despercebida."*
-
-> [!IMPORTANT]
-> **Validação Robusta**: Em testes de Cross-Validation com 5 divisões distintas, o modelo manteve **1.0000 de Recall médio**, comprovando que a capacidade do modelo não é resultado de um 'split de sorte', mas de features físicas bem fundamentadas.
+### Arquitetura do Sistema:
+1.  **Ingestão Resiliente**: Scripts com política de *Retry* e backoff exponencial.
+2.  **Feature Engineering Física**: 
+    *   **AstroRisk Score**: Aproximação de Energia Cinética ($E \propto d^3 \cdot v^2 / dist$).
+    *   **Transformações Logarítmicas**: Estabilização de variância para modelos lineares.
+3.  **Camada de Inferência (Production Ready)**: Classe `RiskPredictor` robusta, com validação de entrada e tratamento de erros profissional.
 
 ---
 
-### Pré-requisitos
-- Python 3.11+
-- Uma chave de API da [NASA API Portal](https://api.nasa.gov/)
+## 📈 Resultados (Data Case)
+- **Recuperação (Recall) de 100%**: O modelo prioriza a segurança planetária, garantindo que **nenhuma ameaça real passe despercebida**, mesmo que isso gere alarmes falsos controlados.
+- **Consistência Estatística**: Validado via *StratifiedKFold* com recall médio estável em 1.0000.
 
-### Instalação e Execução
-1. Clone o repositório e acesse a pasta.
-2. Crie e ative o ambiente virtual:
+---
+
+### 🛠️ Instalação e Execução
+
+1. **Setup do Ambiente**:
    ```bash
+   git clone https://github.com/igortude/AstroStudy.git
+   cd AstroStudy
    python -m venv .venv
    source .venv/bin/activate
-   ```
-3. Instale o pacote e as dependências:
-   ```bash
    pip install -e .
-   pip install pandas scikit-learn matplotlib seaborn loguru joblib
+   pip install -r requirements.txt # Ou instale manual: streamlit plotly pandas scikit-learn loguru joblib
    ```
-4. Configure sua chave da API:
+
+2. **Executar o Dashboard**:
    ```bash
-   cp .env.example .env
-   # Adicione NASA_API_KEY no arquivo
+   streamlit run dashboard/app.py
    ```
-5. Execute os pipelines na ordem:
+
+3. **Pipelines de Dados (Opcional)**:
    ```bash
-   # Baixar dados brutos
-   python pipelines/run_ingestion.py
-   
-   # Tratar dados e gerar features (AstroRisk)
-   python pipelines/run_processing.py
-   
-   # Treinar modelo, aplicar CV e gerar Curva PR
-   python pipelines/run_baseline_training.py
+   python pipelines/run_ingestion.py   # Ingestão Raw
+   python pipelines/run_processing.py  # Feature Engineering
+   python pipelines/run_baseline_training.py # Treinamento do Modelo
    ```
 
 ---

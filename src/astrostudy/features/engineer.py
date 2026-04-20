@@ -63,7 +63,10 @@ class FeatureEngineer:
         # 6. FEATURES ADICIONAIS (Identidade)
         # Identificador composto para garantir que cada passagem do mesmo asteroide 
         # seja tratada como um evento orbital distinto.
-        df_feat['event_id'] = df_feat['id'].astype(str) + "_" + df_feat['date'].astype(str)
+        if 'id' in df_feat.columns and 'date' in df_feat.columns:
+            df_feat['event_id'] = df_feat['id'].astype(str) + "_" + df_feat['date'].astype(str)
+        else:
+            df_feat['event_id'] = "unknown"
         
         logger.success("Pipeline de Feature Engineering concluído com sucesso.")
         return df_feat
