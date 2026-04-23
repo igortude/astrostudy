@@ -19,6 +19,12 @@ O diferencial deste projeto é o foco em **engenharia de features baseada em pri
 - 🔗 **Repositório:** [https://github.com/igortude/astrostudy](https://github.com/igortude/astrostudy)
 - 🧪 **Demo Online:** [![Live Demo](https://img.shields.io/badge/Demo-Live-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)](https://astrostudy-7eqypnocbcequa5w5wuerm.streamlit.app)
 
+<p align="center">
+  <a href="https://astrostudy-7eqypnocbcequa5w5wuerm.streamlit.app" target="_blank">
+    <img src="https://raw.githubusercontent.com/igortude/astrostudy/main/assets/astrostudy.gif" alt="AstroStudy Demonstração" width="80%">
+  </a>
+</p>
+
 
 ## 🧠 O Problema de Negócio (Data Science Case)
 Agências espaciais frequentemente utilizam heurísticas rígidas (ex: *diâmetro > 150m* E *distância < 0.05 UA*) para rotular um asteroide. No entanto, o risco real é uma dinâmica contínua entre tamanho, velocidade e proximidade.
