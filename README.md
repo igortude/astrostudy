@@ -16,7 +16,7 @@ O diferencial deste projeto é o foco em **engenharia de features baseada em pri
 ---
 
 ## 🚀 Links
-- 🔗 **Repositório:** [https://github.com/igortude/ArchitectAI](https://github.com/igortude/ArchitectAI)
+- 🔗 **Repositório:** [https://github.com/igortude/astrostudy](https://github.com/igortude/astrostudy)
 - 🧪 **Demo Online:** [![Live Demo](https://img.shields.io/badge/Demo-Live-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)](https://astrostudy-7eqypnocbcequa5w5wuerm.streamlit.app)
 
 
