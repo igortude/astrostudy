@@ -15,6 +15,11 @@ O diferencial deste projeto é o foco em **engenharia de features baseada em pri
 
 ---
 
+## 🚀 Links
+- 🔗 **Repositório:** [https://github.com/igortude/ArchitectAI](https://github.com/igortude/ArchitectAI)
+- 🧪 **Demo Online:** [![Live Demo](https://img.shields.io/badge/Demo-Live-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)](https://astrostudy-7eqypnocbcequa5w5wuerm.streamlit.app)
+
+
 ## 🧠 O Problema de Negócio (Data Science Case)
 Agências espaciais frequentemente utilizam heurísticas rígidas (ex: *diâmetro > 150m* E *distância < 0.05 UA*) para rotular um asteroide. No entanto, o risco real é uma dinâmica contínua entre tamanho, velocidade e proximidade.
 

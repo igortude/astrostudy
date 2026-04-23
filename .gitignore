@@ -7,7 +7,7 @@ data/interim/
 data/processed/
 
 # Modelos treinados
-models/trained/
+#models/trained/
 models/reports/
 
 # Python
